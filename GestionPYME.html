@@ -464,6 +464,12 @@
             <div class="kpi-sub"><span class="down">▲ 4%</span> vs mes anterior</div>
             <div class="kpi-icon">📤</div>
           </div>
+          <div class="kpi-card teal">
+            <div class="kpi-label">Caja Vecina neta</div>
+            <div class="kpi-value">$124k</div>
+            <div class="kpi-sub"><span class="up">▲ 9%</span> operaciones BancoEstado</div>
+            <div class="kpi-icon">🏧</div>
+          </div>
           <div class="kpi-card green">
             <div class="kpi-label">Flujo de caja neto</div>
             <div class="kpi-value">$535k</div>
@@ -486,6 +492,24 @@
           <div class="card">
             <div class="card-title"><span class="dot" style="background:var(--amber)"></span>Top productos más vendidos</div>
             <canvas id="chartTop" height="200"></canvas>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:24px">
+          <div class="card-title"><span class="dot" style="background:var(--navy2)"></span>Caja Vecina — Movimientos recientes</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Operación</th><th>Tipo</th><th>Monto</th><th>Destino / Origen</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Transferencia</td><td><span class="chip teal">Ingreso</span></td><td style="font-family:'IBM Plex Mono',monospace">$28.200</td><td>Cuenta BancoEstado</td></tr>
+                <tr><td>Depósito</td><td><span class="chip teal">Ingreso</span></td><td style="font-family:'IBM Plex Mono',monospace">$16.700</td><td>Cliente Caja Vecina</td></tr>
+                <tr><td>Giro</td><td><span class="chip out">Egreso</span></td><td style="font-family:'IBM Plex Mono',monospace">$8.500</td><td>Proveedor X</td></tr>
+                <tr><td>Compra con tarjeta</td><td><span class="chip teal">Ingreso</span></td><td style="font-family:'IBM Plex Mono',monospace">$12.300</td><td>Tarjeta débito/crédito otro banco</td></tr>
+                <tr><td>Transferencia</td><td><span class="chip out">Egreso</span></td><td style="font-family:'IBM Plex Mono',monospace">$5.200</td><td>Pago servicios</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -767,7 +791,16 @@
       </div>
       <div class="form-group">
         <label>Método de pago</label>
-        <select><option>Efectivo</option><option>Débito</option><option>Crédito</option><option>Transferencia</option></select>
+        <select>
+          <option>Efectivo</option>
+          <option>Débito</option>
+          <option>Crédito</option>
+          <option>Transferencia</option>
+          <option>Caja Vecina - Giro</option>
+          <option>Caja Vecina - Depósito</option>
+          <option>Caja Vecina - Transferencia</option>
+          <option>Tarjeta otro banco</option>
+        </select>
       </div>
       <div class="form-group full">
         <label>Observación (opcional)</label>
