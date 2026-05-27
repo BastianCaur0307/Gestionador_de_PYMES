@@ -1,0 +1,34 @@
+{
+  "name": "gestapyme",
+  "version": "0.1.0",
+  "description": "Gestor de PYMES - Electron + Node + SQLite",
+  "main": "main.js",
+  "scripts": {
+    "server": "node ./src/main/server.js",
+    "electron": "electron .",
+    "start": "echo Run 'npm run server' and 'npm run electron' in separate terminals",
+    "package": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.gestapyme.app",
+    "files": [
+      "GestionPYME (6).html",
+      "main.js",
+      "src/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  }
+}
