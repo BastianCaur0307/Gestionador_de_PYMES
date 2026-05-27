@@ -9,13 +9,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 :root{--navy:#0F2B5B;--navy2:#1A4085;--teal:#2E9E50;--teal2:#237A3E;--amber:#F5A623;--red:#E53E3E;--green:#2E9E50;--bg:#F4F7F4;--surface:#fff;--border:#D6E4D6;--text:#0C2340;--muted:#5A7A6A}
+/* Safe bottom uses env(safe-area-inset-bottom) when available; fallback to 96px to avoid overlap with taskbars */
+:root{--safe-bottom: env(safe-area-inset-bottom, 96px)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);font-size:14px}
-.shell{display:flex;height:100vh;overflow:hidden}
+.html,body{}
+.html,body{}
+html,body{height:100vh;font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);font-size:14px;overflow-x:hidden;padding-bottom:var(--safe-bottom);box-sizing:border-box}
+.shell{display:flex;min-height:calc(100vh - var(--safe-bottom));overflow-x:hidden}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.content{flex:1;overflow-y:auto;padding:28px 32px}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:28px 32px;padding-bottom:calc(var(--safe-bottom) + 8px)}
 /* sidebar */
-.sidebar{width:230px;background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden}
+.sidebar{width:230px;background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow-y:auto;overflow-x:hidden;min-height:0;padding-bottom:calc(var(--safe-bottom) + 12px)}
 .sidebar::before{content:'';position:absolute;top:-80px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(46,158,80,.3) 0%,transparent 70%);pointer-events:none}
 .sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
 .logo-mark{display:flex;align-items:center;gap:10px}
