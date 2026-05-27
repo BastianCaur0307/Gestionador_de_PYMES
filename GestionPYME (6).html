@@ -2068,3 +2068,52 @@ renderDashboard();
 </script>
 </body>
 </html>
+<script src="src/renderer/js/api.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  if(!window.GestAPI) return;
+  try{
+    const vv = await GestAPI.ventas.list();
+    window.S = window.S || {};
+    S.ventas = (vv||[]).map(v=>{ try{ v.items = JSON.parse(v.items||'[]'); }catch(e){ v.items = []; } return v;});
+    S.egresos = await GestAPI.egresos.list();
+    S.productos = await GestAPI.productos.list();
+    S.perfil = await GestAPI.perfil.get();
+    if(typeof renderVentas==='function') renderVentas();
+    if(typeof renderEgresos==='function') renderEgresos();
+    if(typeof renderInventario==='function') renderInventario();
+    if(typeof renderBoletas==='function') renderBoletas();
+    if(typeof renderPerfil==='function') renderPerfil();
+    if(typeof renderDashboard==='function') renderDashboard();
+    console.log('Sincronización inicial completada con API local');
+  }catch(e){ console.error('Sync error',e); }
+});
+
+// Sobrescribir eliminaciones para propagar al servidor
+const __elimVenta = window.elimVenta;
+window.elimVenta = async function(id){
+  try{
+    if(window.GestAPI) await GestAPI.ventas.delete(id);
+  }catch(e){ console.error(e); }
+  if(typeof __elimVenta === 'function') __elimVenta(id);
+};
+
+const __elimEgreso = window.elimEgreso;
+window.elimEgreso = async function(id){
+  try{ if(window.GestAPI) await GestAPI.egresos.delete(id); }catch(e){ console.error(e); }
+  if(typeof __elimEgreso === 'function') __elimEgreso(id);
+};
+
+const __elimProducto = window.elimProducto;
+window.elimProducto = async function(id){
+  try{ if(window.GestAPI) await GestAPI.productos.delete(id); }catch(e){ console.error(e); }
+  if(typeof __elimProducto === 'function') __elimProducto(id);
+};
+
+// Utilidades para sincronizar ventas creadas localmente hacia el servidor
+window.syncVentaToServer = async function(venta){
+  if(!window.GestAPI) return null;
+  const v = { fecha: venta.fecha || hoy(), total: venta.total || 0, cliente: venta.cliente || '', items: venta.items || [] };
+  return await GestAPI.ventas.create(v);
+};
+</script>
